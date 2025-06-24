@@ -1,14 +1,14 @@
-// eslint-disable-next-line
+// biome-ignore lint/correctness/noUnusedImports: it's necessary import Knex to IDE recognize tables columns
 import { Knex } from 'knex'
 
 declare module 'knex/types/tables' {
-  export interface Tables {
-    transactions: {
-      id: string
-      title: string
-      amount: number
-      created_at: string
-      session_id?: string
-    }
-  }
+	export interface Tables {
+		transactions: {
+			id: string
+			title: string
+			amount: number
+			created_at: string
+			session_id?: string
+		}
+	}
 }

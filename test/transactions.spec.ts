@@ -82,4 +82,25 @@ describe('Transactions routes', () => {
 			}),
 		)
 	})
+
+	it('should be able to return a summary', async () => {
+		const createTransactionResponse = await request(app.server)
+			.post('/transactions')
+			.send({
+				title: 'New transaction',
+				amount: 5000,
+				type: 'credit',
+			})
+
+		const cookies: string = createTransactionResponse.get('Set-Cookie')
+
+		const summaryResponse = await request(app.server)
+			.get('/transactions/summary')
+			.set('Cookie', cookies)
+			.expect(200)
+
+		expect(summaryResponse.body.summary).toEqual({
+			amount: 5000,
+		})
+	})
 })
